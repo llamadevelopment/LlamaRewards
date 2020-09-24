@@ -1,0 +1,9 @@
+prefix: "&8» &6Rewards &8| &7"
+no-permission: "&cYou have insufficient permissions to execute this command."
+
+reward-cannot-redeem: "&cYou are not able to claim this reward. Please wait."
+can-redeem: "&aRedeem!"
+cannot-redeem: "&cAlready redeemed!"
+
+reward-form-title: "Rewards"
+reward-form-content: ""

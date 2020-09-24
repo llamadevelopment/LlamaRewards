@@ -1,0 +1,6 @@
+name: LlamaRewards
+version: 1.0.0-SNAPSHOT
+api: 1.0.0
+author: Mundschutziii
+main: net.lldv.llamarewards.LlamaRewards
+description: Create timed rewards and claim them.

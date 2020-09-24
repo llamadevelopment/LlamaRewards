@@ -1,0 +1,34 @@
+Provider: Yaml
+
+MySql:
+  Host: "127.0.0.1"
+  Port: "3306"
+  User: "root"
+  Database: "rewards"
+  Password: "i_am_a_rat"
+
+MongoDB:
+  Uri: "URI_LINK"
+  Database: "rewards"
+
+#The interval must be provided in hours
+Rewards:
+  DailyRewardTest:
+    Name: "&5Daily reward"
+    Interval: 24
+    Rewards:
+      - say %p has claimed the daily test reward!
+      - give %p diamond 5
+    Message: "§aYou got 5 diamonds!"
+  WeeklyRewardTest:
+    Name: "&6Weekly reward"
+    Interval: 168
+    Rewards:
+      - say %p has claimed the weekly test reward!
+      - give %p diamond 32
+    Message: "§aYou got 32 diamonds!"
+
+Commands:
+  Reward:
+    Name: "reward"
+    Description: "Claim rewards"
