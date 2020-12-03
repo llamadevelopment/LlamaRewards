@@ -81,7 +81,7 @@ public class MySqlProvider extends Provider {
 
     @Override
     public void redeemReward(Player player, Reward reward) {
-        long intervalSet = (reward.getInterval() * 3600000) + System.currentTimeMillis();
+        long intervalSet = (reward.getInterval() * 3600000L) + System.currentTimeMillis();
         String rawList = "";
         try {
             PreparedStatement preparedStatement = this.connection.prepareStatement("SELECT * FROM reward_data WHERE PLAYER = ?");

@@ -61,7 +61,7 @@ public class MongodbProvider extends Provider {
 
     @Override
     public void redeemReward(Player player, Reward reward) {
-        long intervalSet = (reward.getInterval() * 3600000) + System.currentTimeMillis();
+        long intervalSet = (reward.getInterval() * 3600000L) + System.currentTimeMillis();
         Document document = this.rewardDataCollection.find(new Document("player", player.getName())).first();
         assert document != null;
         List<String> list = document.getList("rewards", String.class);

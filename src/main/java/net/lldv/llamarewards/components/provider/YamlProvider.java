@@ -36,7 +36,7 @@ public class YamlProvider extends Provider {
 
     @Override
     public void redeemReward(Player player, Reward reward) {
-        long intervalSet = (reward.getInterval() * 3600000) + System.currentTimeMillis();
+        long intervalSet = (reward.getInterval() * 3600000L) + System.currentTimeMillis();
         List<String> list = this.data.getStringList("players." + player.getName() + ".rewards");
 
         Iterator<String> iterator = list.iterator();
