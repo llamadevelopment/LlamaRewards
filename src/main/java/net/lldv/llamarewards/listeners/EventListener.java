@@ -1,5 +1,6 @@
 package net.lldv.llamarewards.listeners;
 
+import cn.nukkit.Server;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
@@ -22,11 +23,13 @@ public class EventListener implements Listener {
             if (!this.instance.provider.playerExists(event.getPlayer())) {
                 this.instance.provider.createPlayer(event.getPlayer());
             }
-            AtomicInteger i = new AtomicInteger();
-            Reward.cachedRewards.values().forEach(s -> {
-                if (this.instance.provider.canRedeem(event.getPlayer(), s)) i.set(i.get() + 1);
-            });
-            if (i.get() != 0) event.getPlayer().sendMessage(Language.get("reward-redeemable", i.get()));
+            Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+                AtomicInteger i = new AtomicInteger();
+                Reward.cachedRewards.values().forEach(s -> {
+                    if (this.instance.provider.canRedeem(event.getPlayer(), s)) i.set(i.get() + 1);
+                });
+                if (i.get() != 0) event.getPlayer().sendMessage(Language.get("reward-redeemable", i.get()));
+            }, 50);
         });
     }
 
