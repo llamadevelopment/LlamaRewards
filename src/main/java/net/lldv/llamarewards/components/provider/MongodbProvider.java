@@ -21,8 +21,6 @@ import java.util.logging.Logger;
 
 public class MongodbProvider extends Provider {
 
-    private final Config config = LlamaRewards.getInstance().getConfig();
-
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
     private MongoCollection<Document> rewardDataCollection;
@@ -30,9 +28,9 @@ public class MongodbProvider extends Provider {
     @Override
     public void connect(LlamaRewards instance) {
         CompletableFuture.runAsync(() -> {
-            MongoClientURI uri = new MongoClientURI(this.config.getString("MongoDB.Uri"));
+            MongoClientURI uri = new MongoClientURI(instance.getConfig().getString("MongoDB.Uri"));
             this.mongoClient = new MongoClient(uri);
-            this.mongoDatabase = this.mongoClient.getDatabase(this.config.getString("MongoDB.Database"));
+            this.mongoDatabase = this.mongoClient.getDatabase(instance.getConfig().getString("MongoDB.Database"));
             this.rewardDataCollection = this.mongoDatabase.getCollection("reward_data");
             Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
             mongoLogger.setLevel(Level.OFF);
