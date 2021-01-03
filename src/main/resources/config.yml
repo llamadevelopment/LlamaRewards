@@ -32,3 +32,4 @@ Commands:
   Reward:
     Name: "reward"
     Description: "Claim rewards"
+    Aliases: [ "claim" ]

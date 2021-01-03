@@ -3,7 +3,7 @@ package net.lldv.llamarewards;
 import cn.nukkit.plugin.PluginBase;
 import lombok.Getter;
 import net.lldv.llamarewards.commands.RewardCommand;
-import net.lldv.llamarewards.components.api.LlamaRewardsAPI;
+import net.lldv.llamarewards.components.api.API;
 import net.lldv.llamarewards.components.data.Reward;
 import net.lldv.llamarewards.components.forms.FormListener;
 import net.lldv.llamarewards.components.language.Language;
@@ -23,13 +23,12 @@ public class LlamaRewards extends PluginBase {
     public Provider provider;
 
     @Getter
-    private static LlamaRewards instance;
+    private static API api;
 
     @Override
     public void onEnable() {
         try {
-            instance = this;
-            saveDefaultConfig();
+            this.saveDefaultConfig();
             this.providers.put("MongoDB", new MongodbProvider());
             this.providers.put("MySql", new MySqlProvider());
             this.providers.put("Yaml", new YamlProvider());
@@ -40,8 +39,8 @@ public class LlamaRewards extends PluginBase {
             this.provider = this.providers.get(getConfig().getString("Provider"));
             this.provider.connect(this);
             this.getLogger().info("§aSuccessfully loaded " + provider.getProvider() + " provider.");
-            LlamaRewardsAPI.setProvider(provider);
-            Language.init();
+            api = new API(this.provider);
+            Language.init(this);
             this.loadPlugin();
             this.getLogger().info("§aPlugin successfully started.");
         } catch (Exception e) {
@@ -64,7 +63,7 @@ public class LlamaRewards extends PluginBase {
             int interval = this.getConfig().getInt("Rewards." + s + ".Interval");
             List<String> rewards = this.getConfig().getStringList("Rewards." + s + ".Rewards");
             String message = this.getConfig().getString("Rewards." + s + ".Message");
-            LlamaRewardsAPI.cachedRewards.put(name, new Reward(name, interval, rewards, message));
+            Reward.cachedRewards.put(name, new Reward(name, interval, rewards, message));
         }
     }
 
